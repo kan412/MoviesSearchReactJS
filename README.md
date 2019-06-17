@@ -1,2 +1,2 @@
-# NewsFeedReactJS
+# MoviesSearchReactJS
 Node + ReactJS

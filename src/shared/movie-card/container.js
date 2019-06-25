@@ -1,16 +1,15 @@
 import React from 'react';
 
-
-const movieCard = props => (
+const movieCard = ({ data }) => (
   <div className="movie card">
-    <img src={props.thumbnail} alt={props.name} className="movie-thumbnail" />
+
+    <img src={data.thumbnail} alt={data.title} className="movie-thumbnail" />
     <div className="movie-header">
-      <span className="movie-name">{props.name}</span>
-      <span className="movie-release-date">2004</span>
-      <span className="movie-genre">Action</span>
+      <span className="movie-name">{data.title}</span>
+      <span className="movie-release-date">{data.year}</span>
+      <span className="movie-genre">{data.genre}</span>
     </div>
   </div>
 );
-
 
 export default movieCard;

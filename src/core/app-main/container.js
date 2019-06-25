@@ -4,9 +4,9 @@ import { moviesList } from '../../shared';
 
 class AppMain extends React.PureComponent {
   render() {
-    const mList = JSON.stringify(moviesList);
+    // const mList = JSON.stringify(moviesList);
     return (
-      <MoviesSearch results={mList} />
+      <MoviesSearch results={moviesList} />
     );
   }
 }

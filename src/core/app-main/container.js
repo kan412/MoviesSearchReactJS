@@ -1,11 +1,12 @@
 import React from 'react';
+import MoviesSearch from '../../feature/movies-search';
+import { moviesList } from '../../shared';
 
 class AppMain extends React.PureComponent {
   render() {
+    const mList = JSON.stringify(moviesList);
     return (
-      <header className="primary">
-        <h1>Netflixroulette</h1>
-      </header>
+      <MoviesSearch results={mList} />
     );
   }
 }

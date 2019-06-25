@@ -1,0 +1,2 @@
+
+export { moviesList } from './constants';

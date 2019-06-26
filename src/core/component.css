@@ -6,8 +6,10 @@
 
 body{
     font-family: "Arial", sans-serif;
-    font-size: 14px;
-    line-height: 21px;
+    font-size: 16px;
+    line-height: 24px;
+    background:#232323;
+    color:#fff;
 }
 
 
@@ -47,14 +49,29 @@ header h1{
     flex:3;
     padding:10px;
     margin-right:10px;
+    background:rgba(85,85,85,0.5);
+    color:#fff;
+    border:none;
+    font-size: 16px;
+    line-height: 24px;
 } 
 
 .search-form button{
-    flex:1;
+    flex: 1;
+    background: #f65261;
+    color:#fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+    line-height: 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 10px;
 }
 
 .search-filter{
-    padding: 10px;
+    padding: 20px 10px;
+    text-transform: uppercase;
 }
 
 .search-filter .buttons{
@@ -67,7 +84,7 @@ header h1{
 
 .search-results-header{
     width:100%;
-    background:#ccc;
+    background:#555;
 }
 
 .search-results-header-inner{
@@ -115,5 +132,34 @@ footer{
     padding: 0 15px;
     margin: 0 auto;
 }
+
+.search-filter input[type='radio']{
+    /* display:none; */
+}
+
+.search-filter label{
+    display: inline-block;
+    background:rgba(85,85,85,0.5);
+    color:#fff;
+    border-radius:3px;
+    border:none;
+    padding:5px 15px;
+    margin-right:0px;
+    text-transform: uppercase;
+}
+
+.search-filter label:first-child{
+    border-radius: 6px 0 0 6px;
+}
+
+.search-filter label:last-child{
+    border-radius: 0 6px 6px 0;
+}
+
+.search-filter label input[type="radio"]:checked, .search-filter label:hover{
+    background: #f65261;
+}
+
+
 
 

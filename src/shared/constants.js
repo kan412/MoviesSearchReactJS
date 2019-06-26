@@ -1,7 +1,7 @@
 export const moviesList = [
   {
     id: 1,
-    title: 'Movie Name One',
+    title: 'Movie One',
     description: 'This is movie description one',
     thumbnail: 'https://dummyimage.com/250x400/cccccc/ffffff.png',
     rating: '3',
@@ -11,17 +11,17 @@ export const moviesList = [
   },
   {
     id: 2,
-    title: 'Movie Name Two',
+    title: 'Movie Two',
     description: 'This is movie description two',
     thumbnail: 'https://dummyimage.com/250x400/cccccc/ffffff.png',
     rating: '3',
     year: '2004',
     duration: '90',
-    genre: 'Action',
+    genre: 'Comedy',
   },
   {
     id: 3,
-    title: 'Movie Name Three',
+    title: 'Movie Three',
     description: 'This is movie description three',
     thumbnail: 'https://dummyimage.com/250x400/cccccc/ffffff.png',
     rating: '3',
@@ -31,17 +31,17 @@ export const moviesList = [
   },
   {
     id: 4,
-    title: 'Movie Name Four',
+    title: 'Movie Four',
     description: 'This is movie description four',
     thumbnail: 'https://dummyimage.com/250x400/cccccc/ffffff.png',
     rating: '3',
     year: '2004',
     duration: '90',
-    genre: 'Action',
+    genre: 'Comedy',
   },
   {
     id: 5,
-    title: 'Movie Name Five',
+    title: 'Movie Five',
     description: 'This is movie description five',
     thumbnail: 'https://dummyimage.com/250x400/cccccc/ffffff.png',
     rating: '3',
@@ -51,13 +51,13 @@ export const moviesList = [
   },
   {
     id: 6,
-    title: 'Movie Name Six',
+    title: 'Movie Six',
     description: 'This is movie description six',
     thumbnail: 'https://dummyimage.com/250x400/cccccc/ffffff.png',
     rating: '3',
     year: '2004',
     duration: '90',
-    genre: 'Action',
+    genre: 'Thriller',
   },
 ];
 

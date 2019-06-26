@@ -4,39 +4,55 @@ import MovieCard from '../../shared/movie-card';
 class MoviesSearch extends React.Component {
   constructor(props) {
     super(props);
+
+    const { data } = this.props;
+
     this.state = {
-      data: this.props.results,
+      movies: data,
       searchBy: 'title',
-      sortBy: 'releasedate',
+      sortBy: 'year',
     };
 
     this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
+    this.handleSort = this.handleSort.bind(this);
   }
 
   handleClick() {
     const inputValue = document.getElementById('search-movies').value;
+    const { searchBy } = this.state;
+    const { data } = this.props;
 
-    if (this.state.searchBy === 'title') {
-      this.setState(state => ({
-        data: state.data.filter(movie => movie.title === inputValue),
-      }));
+    if (searchBy === 'title') {
+      this.setState({ movies: data.filter(movie => movie.title.toLowerCase().includes(inputValue.toLowerCase())) });
     }
 
-    if (this.state.searchBy === 'genre') {
-      this.setState(state => ({
-        data: state.data.filter(movie => movie.genre === inputValue),
-      }));
+    if (searchBy === 'genre') {
+      this.setState({ movies: data.filter(movie => movie.genre.toLowerCase().includes(inputValue.toLowerCase())) });
     }
   }
 
-  handleChange(e) {
+  handleSort(e) {
+    this.setState({ sortBy: e.target.value });
+  }
+
+  handleFilter(e) {
     this.setState({ searchBy: e.target.value });
   }
 
   render() {
-    const { data } = this.state;
-    const movies = data.map(movie => <MovieCard key={movie.id} data={movie} />);
+    const { movies, sortBy, searchBy } = this.state;
+    let sortedMoviesList = [];
+
+    if (sortBy === 'year') {
+      sortedMoviesList = movies.sort((a, b) => b.year - a.year);
+    }
+
+    if (sortBy === 'rating') {
+      sortedMoviesList = movies.sort((a, b) => b.rating - a.rating);
+    }
+
+    const moviesList = sortedMoviesList.map(movie => <MovieCard key={movie.id} data={movie} />);
 
     return (
       <React.Fragment>
@@ -44,22 +60,13 @@ class MoviesSearch extends React.Component {
           <label htmlFor="search-movies">
             <span>FIND YOUR MOVIE</span>
             <input type="text" id="search-movies" />
-            <button type="button" onClick={this.handleClick}>Search</button>
+            <button type="button" onClick={this.handleClick} id="search-button">Search</button>
           </label>
           <div className="search-filter">
             Search by
-            <span className="buttons">
-
-              <label htmlFor="radio-title">
-                Title
-                <input type="radio" name="search-by" onChange={this.handleChange} value="title" id="radio-title" checked={this.state.searchBy === 'title'} />
-              </label>
-
-
-              <label htmlFor="radio-genre">
-                Genre
-                <input type="radio" name="search-by" onChange={this.handleChange} value="genre" id="radio-genre" checked={this.state.searchBy === 'genre'} />
-              </label>
+            <span className="split-buttons">
+              <button type="button" onClick={this.handleFilter} value="title" className={(searchBy === 'title') ? 'active' : ''}>Title</button>
+              <button type="button" onClick={this.handleFilter} value="genre" className={(searchBy === 'genre') ? 'active' : ''}>Genre</button>
             </span>
           </div>
         </div>
@@ -67,29 +74,25 @@ class MoviesSearch extends React.Component {
         <div className="search-results-header">
           <div className="search-results-header-inner">
             <div className="search-results-found">
-              { movies.length }
+              { moviesList.length }
               <span> movies found</span>
             </div>
-            <div className="sort-filter">
+            <div className="search-results-sort">
               Sort by
-              <span className="buttons">
-                <button type="button">Release Date</button>
-                <button type="button">Rating</button>
+              <span className="split-buttons">
+                <button type="button" onClick={this.handleSort} value="year" className={(sortBy === 'year') ? 'active' : ''}>Release Date</button>
+                <button type="button" onClick={this.handleSort} value="rating" className={(sortBy === 'rating') ? 'active' : ''}>Rating</button>
               </span>
             </div>
           </div>
         </div>
 
         <div className="search-results-container">
-          { movies }
+          { (moviesList.length > 0) ? moviesList : 'No Items Found' }
         </div>
       </React.Fragment>
     );
   }
 }
-
-// MoviesSearch.propTypes = {
-//   results: PropTypes.
-// };
 
 export default MoviesSearch;

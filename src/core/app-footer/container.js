@@ -4,7 +4,12 @@ class AppFooter extends React.PureComponent {
   render() {
     return (
       <footer>
-        <p>&copy; All rights Reserved</p>
+        <div className="footer-inner">
+          <span className="logo">
+            Netflix
+            <span>roulette</span>
+          </span>
+        </div>
       </footer>
     );
   }

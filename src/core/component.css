@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap');
+
 *{
     padding:0;
     margin:0;
@@ -5,11 +7,41 @@
 }
 
 body{
-    font-family: "Arial", sans-serif;
+    font-family: 'Montserrat', sans-serif;;
     font-size: 16px;
     line-height: 24px;
+    font-weight: 400;
     background:#232323;
     color:#fff;
+}
+
+button{
+    display: inline-block;
+    background:rgba(85,85,85,0.5);
+    color:#fff;
+    border-radius: 6px;
+    border:none;
+    padding:5px 15px;
+    margin-right:0px;
+    text-transform: uppercase;
+    cursor:pointer;
+}
+
+button:hover, button.active{
+    background: #f65261 !important;
+}
+
+.split-buttons button{
+    border-radius:0;
+} 
+
+.split-buttons button:first-child{
+    border-radius: 6px 0 0 6px;
+    border-right: 1px solid #232323;
+}
+
+.split-buttons button:last-child{
+    border-radius: 0 6px 6px 0;
 }
 
 
@@ -21,8 +53,15 @@ header{
     margin:0 auto;
 }
 
-header h1{
+.logo{
     padding: 20px;
+    font-size: 25px;
+    line-height: 37px;
+    color: #f65261;
+}
+
+.logo span{
+    font-weight: 400;
 }
 
 .search-form{
@@ -56,7 +95,7 @@ header h1{
     line-height: 24px;
 } 
 
-.search-form button{
+.search-form #search-button{
     flex: 1;
     background: #f65261;
     color:#fff;
@@ -67,6 +106,7 @@ header h1{
     text-transform: uppercase;
     font-weight: 600;
     padding: 10px;
+    cursor:pointer;
 }
 
 .search-filter{
@@ -74,17 +114,14 @@ header h1{
     text-transform: uppercase;
 }
 
-.search-filter .buttons{
+.search-filter .split-buttons{
     margin-left:10px;
-}
-
-.search-filter .buttons button{
-    padding: 5px;
 }
 
 .search-results-header{
     width:100%;
     background:#555;
+    text-transform: uppercase;
 }
 
 .search-results-header-inner{
@@ -104,14 +141,6 @@ header h1{
     text-align:right;
 }
 
-.sort-filter .buttons{
-    margin-left:10px;
-}
-
-.sort-filter .buttons button{
-    padding: 5px;
-}
-
 .search-results-container{
     width: 100%;
     max-width: 1200px;
@@ -120,46 +149,113 @@ header h1{
     display:flex;
     flex:1;
     flex-wrap: wrap;
+    min-height: 500px;
 }
 
 .search-results-container .card{
-    margin: 15px;
+    margin: 20px;
+}
+
+.search-results-sort .split-buttons{
+    margin-left: 15px;
+}
+
+.search-results-sort .split-buttons button{
+    background: #484848;
 }
 
 footer{
     width: 100%;
+    background:#373737;
+    padding:20px 0;
+}
+
+footer .footer-inner{
     max-width: 1200px;
     padding: 0 15px;
     margin: 0 auto;
+    text-align: center; 
 }
 
-.search-filter input[type='radio']{
-    /* display:none; */
+.movie-header {
+    display:flex;
+    flex-wrap: wrap;
 }
 
-.search-filter label{
+.movie-header > span{
+    flex:1;
+}
+
+.movie-name{
+    font-weight:  bold;
+    flex:3 !important;
+}
+
+.movie-release-date{
+    text-align: center;
+    border: 1px solid #4e4e4e;
+    padding: 3px 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.movie-genre{
+    min-width: 100%;
+    font-size:14px;
+    line-height: 21px;
+    color:#ccc;
+}
+
+/* */
+
+.movie-summary{
+    width: 1200px;
+    margin: 30px auto;
+    display: flex;
+}
+
+.movie-summary > div{
+    flex:1;
+}
+
+.movie-summary .details{
+    flex: 3;
+}
+
+.movie-summary .title{
+    font-weight: 600;
+}
+
+.movie-summary .meta{
+    margin: 10px 0;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+    color:#bbb;
+}
+
+.movie-summary .meta span{
+    margin-right: 15px;
+}
+
+.movie-summary .meta span > span{
+    color:#f65261;
+    font-size: 18px;
+    line-height: 27px;
+    margin-right: 5px;
+}
+
+.movie-summary .rating{
+    font-weight: 400;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
     display: inline-block;
-    background:rgba(85,85,85,0.5);
-    color:#fff;
-    border-radius:3px;
-    border:none;
-    padding:5px 15px;
-    margin-right:0px;
-    text-transform: uppercase;
+    padding: 10px 0;
+    font-size: 27px;
+    text-align: center;
+    color:#80b859;
+    margin-left: 15px;
 }
-
-.search-filter label:first-child{
-    border-radius: 6px 0 0 6px;
-}
-
-.search-filter label:last-child{
-    border-radius: 0 6px 6px 0;
-}
-
-.search-filter label input[type="radio"]:checked, .search-filter label:hover{
-    background: #f65261;
-}
-
-
-
-

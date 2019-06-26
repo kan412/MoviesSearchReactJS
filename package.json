@@ -21,7 +21,8 @@
   "homepage": "https://github.com/kan412/MoviesSearchReactJS#readme",
   "dependencies": {
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -40,7 +41,6 @@
     "style-loader": "^0.23.1",
     "webpack": "^4.34.0",
     "webpack-cli": "^3.3.4",
-    "webpack-dev-server": "^3.7.2",
-    "prop-types": "^15.7.2"
+    "webpack-dev-server": "^3.7.2"
   }
 }

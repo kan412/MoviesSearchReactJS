@@ -57,9 +57,21 @@ button:hover, button.active{
 
 header{
     width: 100%;
+    padding:0;
+    background: #2b2b2b;
+}
+
+.header-inner{
     max-width: 1200px;
-    padding:0 15px;
     margin:0 auto;
+}
+
+header a, 
+header a:link,
+header a:active,
+header a:hover{
+    text-decoration: none;
+    color: unset;
 }
 
 .logo{
@@ -67,6 +79,7 @@ header{
     font-size: 25px;
     line-height: 37px;
     color: #f65261;
+    font-weight: bold;
 }
 
 .logo span{
@@ -123,6 +136,14 @@ footer{
     width: 100%;
     background:#373737;
     padding:20px 0;
+}
+
+footer a, 
+footer a:link,
+footer a:active,
+footer a:hover{
+    text-decoration: none;
+    color: unset;
 }
 
 footer .footer-inner{

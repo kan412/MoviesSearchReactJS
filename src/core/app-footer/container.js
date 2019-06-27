@@ -5,10 +5,12 @@ class AppFooter extends React.PureComponent {
     return (
       <footer>
         <div className="footer-inner">
-          <span className="logo">
-            Netflix
-            <span>roulette</span>
-          </span>
+          <a href="/">
+            <span className="logo">
+              Netflix
+              <span>roulette</span>
+            </span>
+          </a>
         </div>
       </footer>
     );

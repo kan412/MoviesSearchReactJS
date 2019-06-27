@@ -8,11 +8,13 @@ import './component.css';
 class App extends React.PureComponent {
   render() {
     return (
-      <ErrorBoundary>
+      <React.Fragment>
         <AppHeader />
-        <AppMain />
+        <ErrorBoundary>
+          <AppMain />
+        </ErrorBoundary>
         <AppFooter />
-      </ErrorBoundary>
+      </React.Fragment>
     );
   }
 }

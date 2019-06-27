@@ -5,9 +5,8 @@ import { moviesList } from '../../shared/constants';
 import './component.css';
 
 const movieDetails = ({ match }) => {
-  const data = moviesList;
-  const currentPageData = data[parseInt(match.params.id, 10)];
-  const relatedMovies = data.filter(
+  const currentPageData = moviesList[parseInt(match.params.id, 10) - 1];
+  const relatedMovies = moviesList.filter(
     movie => movie.genre === currentPageData.genre && movie.id !== currentPageData.id,
   );
   const movList = relatedMovies.map(movie => <MovieCard key={movie.id} data={movie} />);

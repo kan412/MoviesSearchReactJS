@@ -12,13 +12,9 @@ class MoviesSearch extends React.Component {
       searchBy: 'title',
       sortBy: 'year',
     };
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleFilter = this.handleFilter.bind(this);
-    this.handleSort = this.handleSort.bind(this);
   }
 
-  handleClick() {
+  handleClick = () => {
     const inputValue = document.getElementById('search-movies').value;
     const { searchBy } = this.state;
 
@@ -39,11 +35,11 @@ class MoviesSearch extends React.Component {
     }
   }
 
-  handleSort(e) {
+  handleSort = (e) => {
     this.setState({ sortBy: e.target.value });
   }
 
-  handleFilter(e) {
+  handleFilter = (e) => {
     this.setState({ searchBy: e.target.value });
   }
 

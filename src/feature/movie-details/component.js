@@ -1,11 +1,12 @@
 import React from 'react';
 import MovieCard from '../../shared/movie-card';
+import { moviesList } from '../../shared/constants';
 
-const movieDetails = (props) => {
-  const { data } = props;
-  const currentPageData = data[3];
+const movieDetails = ({ match }) => {
+  const data = moviesList;
+  const currentPageData = data[match.params.id];
   const relatedMovies = data.filter((movie => movie.genre === currentPageData.genre && movie.id !== currentPageData.id));
-  const moviesList = relatedMovies.map(movie => <MovieCard key={movie.id} data={movie} />);
+  const movList = relatedMovies.map(movie => <MovieCard key={movie.id} data={movie} />);
   return (
     <React.Fragment>
       <div className="movie-summary">
@@ -42,10 +43,10 @@ const movieDetails = (props) => {
       </div>
 
       <div className="search-results-container">
-        { (moviesList.length > 0) ? moviesList : 'No Items Found' }
+        { (movList.length > 0) ? movList : 'No Items Found' }
       </div>
     </React.Fragment>
   );
-}
+};
 
 export default movieDetails;

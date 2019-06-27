@@ -15,6 +15,15 @@ body{
     color:#fff;
 }
 
+a, a:active, a:link, a:visited{
+    color:#fff;
+    text-decoration: underline;
+}
+
+a:hover{
+    color:#f65261;
+}
+
 button{
     display: inline-block;
     background:rgba(85,85,85,0.5);

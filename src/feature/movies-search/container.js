@@ -1,14 +1,13 @@
 import React from 'react';
 import MovieCard from '../../shared/movie-card';
+import { moviesList } from '../../shared';
 
 class MoviesSearch extends React.Component {
   constructor(props) {
     super(props);
 
-    const { data } = this.props;
-
     this.state = {
-      movies: data,
+      movies: moviesList,
       searchBy: 'title',
       sortBy: 'year',
     };
@@ -21,14 +20,13 @@ class MoviesSearch extends React.Component {
   handleClick() {
     const inputValue = document.getElementById('search-movies').value;
     const { searchBy } = this.state;
-    const { data } = this.props;
 
     if (searchBy === 'title') {
-      this.setState({ movies: data.filter(movie => movie.title.toLowerCase().includes(inputValue.toLowerCase())) });
+      this.setState({ movies: moviesList.filter(movie => movie.title.toLowerCase().includes(inputValue.toLowerCase())) });
     }
 
     if (searchBy === 'genre') {
-      this.setState({ movies: data.filter(movie => movie.genre.toLowerCase().includes(inputValue.toLowerCase())) });
+      this.setState({ movies: moviesList.filter(movie => movie.genre.toLowerCase().includes(inputValue.toLowerCase())) });
     }
   }
 
@@ -52,7 +50,7 @@ class MoviesSearch extends React.Component {
       sortedMoviesList = movies.sort((a, b) => b.rating - a.rating);
     }
 
-    const moviesList = sortedMoviesList.map(movie => <MovieCard key={movie.id} data={movie} />);
+    const mList = sortedMoviesList.map(movie => <MovieCard key={movie.id} data={movie} />);
 
     return (
       <React.Fragment>
@@ -74,7 +72,7 @@ class MoviesSearch extends React.Component {
         <div className="search-results-header">
           <div className="search-results-header-inner">
             <div className="search-results-found">
-              { moviesList.length }
+              { mList.length }
               <span> movies found</span>
             </div>
             <div className="search-results-sort">
@@ -88,7 +86,7 @@ class MoviesSearch extends React.Component {
         </div>
 
         <div className="search-results-container">
-          { (moviesList.length > 0) ? moviesList : 'No Items Found' }
+          { (mList.length > 0) ? mList : 'No Items Found' }
         </div>
       </React.Fragment>
     );

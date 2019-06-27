@@ -1,11 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MovieCard from '../../shared/movie-card';
 import { moviesList } from '../../shared/constants';
+import './component.css';
 
 const movieDetails = ({ match }) => {
   const data = moviesList;
   const currentPageData = data[match.params.id];
-  const relatedMovies = data.filter((movie => movie.genre === currentPageData.genre && movie.id !== currentPageData.id));
+  const relatedMovies = data.filter(
+    movie => movie.genre === currentPageData.genre && movie.id !== currentPageData.id,
+  );
   const movList = relatedMovies.map(movie => <MovieCard key={movie.id} data={movie} />);
   return (
     <React.Fragment>
@@ -38,7 +42,9 @@ const movieDetails = ({ match }) => {
 
       <div className="search-results-header">
         <div className="search-results-header-inner">
-          <span>Films by { currentPageData.genre } genre </span>
+          <span>Films by </span>
+          { currentPageData.genre }
+          <span> genre </span>
         </div>
       </div>
 
@@ -47,6 +53,14 @@ const movieDetails = ({ match }) => {
       </div>
     </React.Fragment>
   );
+};
+
+movieDetails.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default movieDetails;

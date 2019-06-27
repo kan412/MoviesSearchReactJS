@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './component.css';
 
 const movieCard = ({ data }) => (
   <div className="movie card">
@@ -15,3 +17,12 @@ const movieCard = ({ data }) => (
 );
 
 export default movieCard;
+
+movieCard.propTypes = {
+  data: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    year: PropTypes.number,
+    genre: PropTypes.string,
+  }).isRequired,
+};

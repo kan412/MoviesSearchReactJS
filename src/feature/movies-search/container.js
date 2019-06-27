@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieCard from '../../shared/movie-card';
 import { moviesList } from '../../shared';
+import './component.css';
 
 class MoviesSearch extends React.Component {
   constructor(props) {
@@ -22,11 +23,19 @@ class MoviesSearch extends React.Component {
     const { searchBy } = this.state;
 
     if (searchBy === 'title') {
-      this.setState({ movies: moviesList.filter(movie => movie.title.toLowerCase().includes(inputValue.toLowerCase())) });
+      this.setState({
+        movies: moviesList.filter(
+          movie => movie.title.toLowerCase().includes(inputValue.toLowerCase()),
+        ),
+      });
     }
 
     if (searchBy === 'genre') {
-      this.setState({ movies: moviesList.filter(movie => movie.genre.toLowerCase().includes(inputValue.toLowerCase())) });
+      this.setState({
+        movies: moviesList.filter(
+          movie => movie.genre.toLowerCase().includes(inputValue.toLowerCase()),
+        ),
+      });
     }
   }
 

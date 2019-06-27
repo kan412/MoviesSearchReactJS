@@ -1,0 +1,29 @@
+.movie-header {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.movie-header > span{
+    flex:1;
+}
+
+.movie-name{
+    font-weight:  bold;
+    flex:3 !important;
+}
+
+.movie-release-date{
+    text-align: center;
+    border: 1px solid #4e4e4e;
+    padding: 3px 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.movie-genre{
+    min-width: 100%;
+    font-size:14px;
+    line-height: 21px;
+    color:#ccc;
+}

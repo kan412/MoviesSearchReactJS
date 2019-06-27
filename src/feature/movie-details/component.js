@@ -6,7 +6,7 @@ import './component.css';
 
 const movieDetails = ({ match }) => {
   const data = moviesList;
-  const currentPageData = data[match.params.id];
+  const currentPageData = data[parseInt(match.params.id, 10)];
   const relatedMovies = data.filter(
     movie => movie.genre === currentPageData.genre && movie.id !== currentPageData.id,
   );
@@ -58,7 +58,7 @@ const movieDetails = ({ match }) => {
 movieDetails.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };

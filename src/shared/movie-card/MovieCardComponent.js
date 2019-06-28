@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './component.css';
+import styles from './MovieCard.css';
 
 const movieCard = ({ data }) => (
-  <div className="movie card">
+  <div className={styles.movie}>
     <Link to={`/movies/${data.id}`}>
       <img src={data.thumbnail} alt={data.title} className="movie-thumbnail" />
     </Link>
-    <div className="movie-header">
-      <span className="movie-name">{data.title}</span>
-      <span className="movie-release-date">{data.year}</span>
-      <span className="movie-genre">{data.genre}</span>
+    <div className={styles['movie-header']}>
+      <span className={styles['movie-name']}>{data.title}</span>
+      <span className={styles['movie-release-date']}>{data.year}</span>
+      <span className={styles['movie-genre']}>{data.genre}</span>
     </div>
   </div>
 );

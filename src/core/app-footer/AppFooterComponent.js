@@ -1,10 +1,11 @@
 import React from 'react';
+import styles from './AppFooter.css';
 
 const AppFooter = () => (
-  <footer>
-    <div className="footer-inner">
+  <footer className={styles.footer}>
+    <div className={styles.inner}>
       <a href="/">
-        <span className="logo">
+        <span className={styles.logo}>
           Netflix
           <span>roulette</span>
         </span>
@@ -12,6 +13,5 @@ const AppFooter = () => (
     </div>
   </footer>
 );
-
 
 export default AppFooter;

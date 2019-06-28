@@ -1,6 +1,6 @@
 import React from 'react';
-import './component.css';
 import PropTypes from 'prop-types';
+import styles from './ErrorBoundary.css';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -25,9 +25,9 @@ class ErrorBoundary extends React.Component {
     if (hasError) {
       // You can render any custom fallback UI
       return (
-        <div className="error">
-          <h1>Something went wrong</h1>
-          <p>
+        <div className={styles.error}>
+          <h1 className={styles.title}>Something went wrong</h1>
+          <p className={styles.info}>
             <span>Please go back to </span>
             <a href="/">main page</a>
             <span> and try again. Thank you</span>

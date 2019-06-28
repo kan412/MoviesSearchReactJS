@@ -61,4 +61,12 @@ export const moviesList = [
   },
 ];
 
-export const AnotherValue = 'Booom!!!';
+export const SEARCH_BY = {
+  TITLE: 'TITLE',
+  GENRE: 'GENRE',
+};
+
+export const SORT_BY = {
+  YEAR: 'YEAR',
+  RATING: 'RATING',
+};

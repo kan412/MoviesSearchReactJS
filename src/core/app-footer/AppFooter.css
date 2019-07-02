@@ -1,0 +1,33 @@
+
+.footer{
+    width: 100%;
+    background:#373737;
+    padding:20px 0;
+}
+
+.footer a, 
+.footer a:link,
+.footer a:active,
+.footer a:hover{
+    text-decoration: none;
+    color: unset;
+}
+
+.footer .inner{
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
+    text-align: center; 
+}
+
+.logo{
+    padding: 20px;
+    font-size: 25px;
+    line-height: 37px;
+    color: #f65261;
+    font-weight: bold;
+}
+
+.logo span{
+    font-weight: 400;
+}

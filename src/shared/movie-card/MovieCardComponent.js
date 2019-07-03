@@ -5,7 +5,7 @@ import styles from './MovieCard.css';
 
 const movieCard = ({ data }) => (
   <div className={styles.movie}>
-    <Link to={`/movies/${data.id}`}>
+    <Link to={`/film/${data.id}`}>
       <img src={data.thumbnail} alt={data.title} className="movie-thumbnail" />
     </Link>
     <div className={styles['movie-header']}>

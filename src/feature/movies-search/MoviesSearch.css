@@ -38,6 +38,12 @@
     margin: 20px;
 }
 
+.notfound-title{
+    width:100%;
+    margin: 50px auto;
+    text-align: center;
+}
+
 .search-results-sort .split-buttons{
     margin-left: 15px;
 }

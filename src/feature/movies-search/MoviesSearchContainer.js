@@ -9,7 +9,7 @@ class MoviesSearch extends React.Component {
     super(props);
 
     this.state = {
-      movies: moviesList,
+      movies: [],
       searchBy: SEARCH_BY.TITLE,
       sortBy: SORT_BY.YEAR,
     };
@@ -68,7 +68,7 @@ class MoviesSearch extends React.Component {
         </div>
 
         <div className={styles['search-results-container']}>
-          { (mList.length > 0) ? mList : 'No Items Found' }
+          { (mList.length > 0) ? mList : <h3 className={styles['notfound-title']}>No films Found</h3> }
         </div>
       </React.Fragment>
     );

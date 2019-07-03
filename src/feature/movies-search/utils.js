@@ -21,4 +21,3 @@ export const getSortedMovies = (sortBy, movies) => {
       throw new Error(`unhandled sortBy: ${sortBy}`);
   }
 };
-

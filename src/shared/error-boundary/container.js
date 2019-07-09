@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './ErrorBoundary.css';
+import styles from './component.css';
 
-class ErrorBoundary extends React.Component {
+class ErrorBoundaryComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -40,8 +40,8 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-export default ErrorBoundary;
+export default ErrorBoundaryComponent;
 
-ErrorBoundary.propTypes = {
+ErrorBoundaryComponent.propTypes = {
   children: PropTypes.element.isRequired,
 };

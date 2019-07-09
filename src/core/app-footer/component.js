@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './AppFooter.css';
+import styles from './component.css';
 
-const AppFooter = () => (
+const AppFooterComponent = () => (
   <footer className={styles.footer}>
     <div className={styles.inner}>
       <a href="/">
@@ -14,4 +14,4 @@ const AppFooter = () => (
   </footer>
 );
 
-export default AppFooter;
+export default AppFooterComponent;

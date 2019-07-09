@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './NotFound.css';
+import styles from './component.css';
 
-const notFound = () => (
+const NotFoundComponent = () => (
   <div className={styles.error}>
     <h1 className={styles.title}>404! Page not found</h1>
     <p className={styles.info}>
@@ -12,4 +12,4 @@ const notFound = () => (
   </div>
 );
 
-export default notFound;
+export default NotFoundComponent;

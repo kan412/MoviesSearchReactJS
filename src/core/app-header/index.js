@@ -1,1 +1,1 @@
-export { default } from './AppHeaderContainer';
+export { default } from './component';

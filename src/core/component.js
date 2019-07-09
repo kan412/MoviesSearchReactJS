@@ -5,7 +5,7 @@ import AppFooter from './app-footer';
 import ErrorBoundary from '../shared/error-boundary';
 import './component.css';
 
-const App = () => (
+const AppComponent = () => (
   <React.Fragment>
     <AppHeader />
     <ErrorBoundary>
@@ -15,4 +15,4 @@ const App = () => (
   </React.Fragment>
 );
 
-export default App;
+export default AppComponent;

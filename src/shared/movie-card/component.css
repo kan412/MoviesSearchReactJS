@@ -1,3 +1,7 @@
+.movie{
+    width: 250px;
+}
+
 .movie-header {
     display:flex;
     flex-wrap: wrap;

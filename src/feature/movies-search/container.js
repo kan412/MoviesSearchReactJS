@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import MovieCard from '../../shared/movie-card';
 import config from '../../../config';
 import { searchBY, sortBY } from '../../core/store/actions';
@@ -9,17 +10,32 @@ import { SEARCH_BY, SORT_BY } from '../../shared';
 import styles from './component.css';
 
 class MoviesSearchContainer extends React.Component {
+  static propTypes = {
+    sortToggle: PropTypes.func.isRequired,
+    filterToggle: PropTypes.func.isRequired,
+    searchBy: PropTypes.string.isRequired,
+    sortBy: PropTypes.string.isRequired,
+    history: PropTypes.object.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       movies: [],
       searchTerm: '',
+      firstLoad: true,
     };
   }
 
-  componentDidUpdate() {
-    const { searchTerm } = this.state;
+
+  componentDidUpdate(prevProps, prevState) {
+    const { searchTerm, firstLoad } = this.state;
     const { sortBy, searchBy } = this.props;
+
+    if (!firstLoad && (prevProps.sortBy === sortBy && prevProps.searchBy === searchBy && prevState.searchTerm === searchTerm)) {
+      return;
+    }
+
     let queryString = '';
 
     if (searchBy === SEARCH_BY.GENRE) {
@@ -30,7 +46,7 @@ class MoviesSearchContainer extends React.Component {
 
     fetch(queryString)
       .then(res => res.json())
-      .then(data => this.setState({ movies: data.data }));
+      .then(data => this.setState({ movies: data.data, firstLoad: false }));
   }
 
   handleClick = () => {
@@ -49,8 +65,7 @@ class MoviesSearchContainer extends React.Component {
   }
 
   handleMovieClick = (movie) => {
-    const url = `/film/`;
-    return <Redirect to={url} />;
+    this.props.history.push(`/film/${movie.id}`);   
   }
 
   moviesList = movies => movies.map(
@@ -121,12 +136,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-MoviesSearchContainer.propTypes = {
-  sortToggle: PropTypes.func.isRequired,
-  filterToggle: PropTypes.func.isRequired,
-  searchBy: PropTypes.string.isRequired,
-  sortBy: PropTypes.string.isRequired,
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(MoviesSearchContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MoviesSearchContainer));

@@ -16,20 +16,19 @@ class MovieDetailsContainer extends React.Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { match } = this.props;
+    console.log(match.params.id);
     const queryString = `${config.API_URL}/${match.params.id}`;
 
-    fetch(queryString)
-      .then(res => res.json())
-      .then(mov => this.setState({ movie: mov }));
+    const moviewRes = await fetch(queryString);
+    const movie = await moviewRes.json();
 
-    const { movie } = this.state;
     const relatedMoviesQueryString = `${config.API_URL}?searchBy=genres&filter=${movie.genres.join(',')}`;
 
-    fetch(relatedMoviesQueryString)
-      .then(res => res.json())
-      .then(movies => this.setState({ relatedMovies: movies.data }));
+    const relatedRes = await fetch(relatedMoviesQueryString);
+    const { data } = await relatedRes.json();
+    this.setState({ movie, relatedMovies: data });
   }
 
   handleMovieClick = (movie) => {
@@ -61,7 +60,7 @@ class MovieDetailsContainer extends React.Component {
               </span>
               <span className={styles.duration}>
                 <span>{movie.runtime}</span>
-                 Mins
+                Mins
               </span>
             </div>
 
@@ -74,13 +73,13 @@ class MovieDetailsContainer extends React.Component {
         <div className={styles['search-results-header']}>
           <div className={styles['search-results-header-inner']}>
             <span>Films by  </span>
-            { movie.genres }
+            {movie.genres}
             <span>  genre </span>
           </div>
         </div>
 
         <div className={styles['search-results-container']}>
-          { (mlist.length > 0) ? mlist : 'No Items Found' }
+          {(mlist.length > 0) ? mlist : 'No Items Found'}
         </div>
       </React.Fragment>
     );

@@ -4,9 +4,11 @@ import getYear from '../utils';
 import styles from './component.css';
 
 const MovieCardComponent = ({ data, onMovieClick }) => (
-  <div className={styles.movie}>
 
-    {/* <img src={data.poster_path} width="250px" height="400px" alt={data.title} onClick={onMovieClick} className="movie-thumbnail" /> */}
+  <div className={styles.movie}>
+    <button type="button" onClick={() => onMovieClick(data)}>
+      <img src={data.poster_path} width="250px" height="400px" alt={data.title} className="movie-thumbnail" />
+    </button>
 
     <div className={styles['movie-header']}>
       <span className={styles['movie-name']}>{data.title}</span>

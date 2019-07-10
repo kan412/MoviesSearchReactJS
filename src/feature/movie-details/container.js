@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import MovieCard from '../../shared/movie-card';
 import getYear from '../../shared/utils';
 import config from '../../../config';
@@ -11,7 +12,6 @@ class MovieDetailsContainer extends React.Component {
 
     this.state = {
       movie: {},
-      genres: [],
       relatedMovies: [],
     };
   }
@@ -22,22 +22,25 @@ class MovieDetailsContainer extends React.Component {
 
     fetch(queryString)
       .then(res => res.json())
-      .then((mov) => {
-        this.setState({ movie: mov });
-        this.setState({ genres: mov.genres });
-      });
+      .then(mov => this.setState({ movie: mov }));
 
-    const { genres } = this.state;
-    const relatedMoviesQueryString = `${config.API_URL}?searchBy=genres&filter=${genres.join(',')}`;
+    const { movie } = this.state;
+    const relatedMoviesQueryString = `${config.API_URL}?searchBy=genres&filter=${movie.genres.join(',')}`;
 
     fetch(relatedMoviesQueryString)
       .then(res => res.json())
       .then(movies => this.setState({ relatedMovies: movies.data }));
   }
 
+  handleMovieClick = (movie) => {
+    const url = `/film/`;
+    return <Redirect to={url} />;
+  };
+
   render() {
+    console.log(typeof this.handleMovieClick);
     const { movie, relatedMovies } = this.state;
-    const mlist = relatedMovies.map(mov => <MovieCard key={mov.id} data={mov} />);
+    const mlist = relatedMovies.map(mov => <MovieCard key={mov.id} data={mov} onMovieClick={this.handleMovieClick} />);
 
     return (
       <React.Fragment>
@@ -82,7 +85,6 @@ class MovieDetailsContainer extends React.Component {
       </React.Fragment>
     );
   }
-
 }
 
 

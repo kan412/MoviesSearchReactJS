@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MovieCard from '../../shared/movie-card';
 import config from '../../../config';
@@ -47,7 +48,14 @@ class MoviesSearchContainer extends React.Component {
     filterToggle(e.target.value);
   }
 
-  moviesList = movies => movies.map(movie => <MovieCard key={movie.id} data={movie} />)
+  handleMovieClick = (movie) => {
+    const url = `/film/`;
+    return <Redirect to={url} />;
+  }
+
+  moviesList = movies => movies.map(
+    movie => <MovieCard key={movie.id} data={movie} onMovieClick={this.handleMovieClick} />,
+  );
 
   render() {
     const { movies } = this.state;

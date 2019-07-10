@@ -2,23 +2,39 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MovieCard from '../../shared/movie-card';
-import {
-  searchBY, sortBY, fetchMovies, updateSearchTerm,
-} from '../../core/store/actions';
+import config from '../../../config';
+import { searchBY, sortBY } from '../../core/store/actions';
 import { SEARCH_BY, SORT_BY } from '../../shared';
-import { getMovies, getSortedMovies } from './utils';
 import styles from './component.css';
 
 class MoviesSearchContainer extends React.Component {
-  componentWillMount() {
-    const { fetchMovs } = this.props;
-    fetchMovs();
+  constructor(props) {
+    super(props);
+    this.state = {
+      movies: [],
+      searchTerm: '',
+    };
+  }
+
+  componentDidUpdate() {
+    const { searchTerm } = this.state;
+    const { sortBy, searchBy } = this.props;
+    let queryString = '';
+
+    if (searchBy === SEARCH_BY.GENRE) {
+      queryString = `${config.API_URL}?sortBy=${sortBy}&sortOrder=desc&searchBy=${searchBy}&filter=${searchTerm}`;
+    } else {
+      queryString = `${config.API_URL}?sortBy=${sortBy}&sortOrder=desc&search=${searchTerm}&searchBy=${searchBy}`;
+    }
+
+    fetch(queryString)
+      .then(res => res.json())
+      .then(data => this.setState({ movies: data.data }));
   }
 
   handleClick = () => {
     const inputValue = document.getElementById('search-movies').value;
-    const { updSearchTerm } = this.props;
-    updSearchTerm(inputValue);
+    this.setState({ searchTerm: inputValue });
   }
 
   handleSort = (e) => {
@@ -31,16 +47,12 @@ class MoviesSearchContainer extends React.Component {
     filterToggle(e.target.value);
   }
 
+  moviesList = movies => movies.map(movie => <MovieCard key={movie.id} data={movie} />)
+
   render() {
-    const {
-      movies, sortBy, searchBy, searchTerm,
-    } = this.props;
-    let searchMovies = [];
-    if (searchTerm !== '') {
-      searchMovies = getMovies(searchBy, movies, searchTerm);
-    }
-    const sortedMoviesList = getSortedMovies(sortBy, searchMovies);
-    const mList = sortedMoviesList.map(movie => <MovieCard key={movie.id} data={movie} />);
+    const { movies } = this.state;
+    const { sortBy, searchBy } = this.props;
+    const mList = this.moviesList(movies);
 
     return (
       <React.Fragment>
@@ -84,7 +96,6 @@ class MoviesSearchContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  movies: state.movies,
   searchTerm: state.searchTerm,
   searchBy: state.searchBy,
   sortBy: state.sortBy,
@@ -94,10 +105,7 @@ const mapDispatchToProps = dispatch => ({
   updSearchTerm: (value) => {
     dispatch(updateSearchTerm(value));
   },
-  fetchMovs: () => {
-    dispatch(fetchMovies());
-  },
-  sortToggle: (value) => {  
+  sortToggle: (value) => {
     dispatch(sortBY(value));
   },
   filterToggle: (value) => {
@@ -106,23 +114,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 MoviesSearchContainer.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    budget: PropTypes.number.isRequired,
-    genres: PropTypes.arrayOf(PropTypes.string).isRequired,
-    overview: PropTypes.string.isRequired,
-    poster_path: PropTypes.string.isRequired,
-    revenue: PropTypes.number.isRequired,
-    release_date: PropTypes.string.isRequired,
-    runtime: PropTypes.number.isRequired,
-    tagline: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    vote_average: PropTypes.number.isRequired,
-    vote_count: PropTypes.number.isRequired,
-  })).isRequired,
-  searchTerm: PropTypes.string.isRequired,
-  updSearchTerm: PropTypes.func.isRequired,
-  fetchMovs: PropTypes.func.isRequired,
   sortToggle: PropTypes.func.isRequired,
   filterToggle: PropTypes.func.isRequired,
   searchBy: PropTypes.string.isRequired,

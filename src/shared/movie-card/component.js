@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { getYear } from '..';
+import getYear from '../utils';
 import styles from './component.css';
 
-const MovieCardComponent = ({ data }) => (
+const MovieCardComponent = ({ data, onMovieClick }) => (
   <div className={styles.movie}>
-    <Link to={`/film/${data.id}`}>
-      <img src={data.poster_path} width="250px" height="400px" alt={data.title} className="movie-thumbnail" />
-    </Link>
+
+    {/* <img src={data.poster_path} width="250px" height="400px" alt={data.title} onClick={onMovieClick} className="movie-thumbnail" /> */}
+
     <div className={styles['movie-header']}>
       <span className={styles['movie-name']}>{data.title}</span>
       <span className={styles['movie-release-date']}>{getYear(data.release_date)}</span>
-      <span className={styles['movie-genre']}>{data.genres[0]}</span>
+      <span className={styles['movie-genre']}>{data.genres.join(', ')}</span>
     </div>
   </div>
 );
@@ -23,7 +22,7 @@ MovieCardComponent.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
-    year: PropTypes.number,
-    genre: PropTypes.string,
+    release_date: PropTypes.string,
+    genres: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };

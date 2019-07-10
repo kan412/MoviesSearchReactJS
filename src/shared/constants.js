@@ -1,14 +1,9 @@
-export const getYear = (date) => {
-  const newdate = new Date(date);
-  return newdate.getFullYear();
-};
-
 export const SEARCH_BY = {
-  TITLE: 'TITLE',
-  GENRE: 'GENRE',
+  TITLE: 'title',
+  GENRE: 'genres',
 };
 
 export const SORT_BY = {
-  YEAR: 'YEAR',
-  RATING: 'RATING',
+  YEAR: 'release_date',
+  RATING: 'vote_average',
 };

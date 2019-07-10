@@ -27,4 +27,5 @@ MovieCardComponent.propTypes = {
     release_date: PropTypes.string,
     genres: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
+  onMovieClick: PropTypes.func.isRequired,
 };

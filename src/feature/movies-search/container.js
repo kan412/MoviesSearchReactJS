@@ -8,11 +8,11 @@ import config from '../../../config';
 import { searchBY, sortBY } from '../../core/store/actions';
 import { SEARCH_BY, SORT_BY } from '../../shared';
 import styles from './component.css';
+import Search from './search';
 
 class MoviesSearchContainer extends React.Component {
   static propTypes = {
     sortToggle: PropTypes.func.isRequired,
-    filterToggle: PropTypes.func.isRequired,
     searchBy: PropTypes.string.isRequired,
     sortBy: PropTypes.string.isRequired,
     history: PropTypes.object.isRequired,
@@ -22,36 +22,36 @@ class MoviesSearchContainer extends React.Component {
     super(props);
     this.state = {
       movies: [],
-      searchTerm: '',
       firstLoad: true,
     };
   }
 
 
   componentDidUpdate(prevProps, prevState) {
-    const { searchTerm, firstLoad } = this.state;
-    const { sortBy, searchBy } = this.props;
+    const { firstLoad } = this.state;
+    const { sortBy, searchBy, searchTerm } = this.props;
 
-    if (!firstLoad && (prevProps.sortBy === sortBy && prevProps.searchBy === searchBy && prevState.searchTerm === searchTerm)) {
+    if (!firstLoad
+       && (prevProps.sortBy === sortBy
+         && prevProps.searchBy === searchBy
+          && prevState.searchTerm === searchTerm)
+    ) {
       return;
     }
 
     let queryString = '';
 
     if (searchBy === SEARCH_BY.GENRE) {
-      queryString = `${config.API_URL}?sortBy=${sortBy}&sortOrder=desc&searchBy=${searchBy}&filter=${searchTerm}`;
+      queryString = `${config.API_URL}?sortBy=${sortBy}&searchBy=${searchBy}&filter=${searchTerm}`;
     } else {
-      queryString = `${config.API_URL}?sortBy=${sortBy}&sortOrder=desc&search=${searchTerm}&searchBy=${searchBy}`;
+      queryString = `${config.API_URL}?sortBy=${sortBy}&search=${searchTerm}&searchBy=${searchBy}`;
     }
 
     fetch(queryString)
       .then(res => res.json())
       .then(data => this.setState({ movies: data.data, firstLoad: false }));
-  }
 
-  handleClick = () => {
-    const inputValue = document.getElementById('search-movies').value;
-    this.setState({ searchTerm: inputValue });
+      console.log(queryString);
   }
 
   handleSort = (e) => {
@@ -59,13 +59,10 @@ class MoviesSearchContainer extends React.Component {
     sortToggle(e.target.value);
   }
 
-  handleFilter = (e) => {
-    const { filterToggle } = this.props;
-    filterToggle(e.target.value);
-  }
 
   handleMovieClick = (movie) => {
-    this.props.history.push(`/film/${movie.id}`);   
+    const { history } = this.props;
+    history.push(`/film/${movie.id}`);
   }
 
   moviesList = movies => movies.map(
@@ -74,25 +71,12 @@ class MoviesSearchContainer extends React.Component {
 
   render() {
     const { movies } = this.state;
-    const { sortBy, searchBy } = this.props;
+    const { sortBy } = this.props;
     const mList = this.moviesList(movies);
 
     return (
       <React.Fragment>
-        <div className={styles['search-form']}>
-          <label htmlFor="search-movies">
-            <span>FIND YOUR MOVIE</span>
-            <input type="text" id="search-movies" />
-            <button type="button" onClick={this.handleClick} id={styles['search-button']}>Search</button>
-          </label>
-          <div className={styles['search-filter']}>
-            Search by
-            <span className={styles['split-buttons']}>
-              <button type="button" onClick={this.handleFilter} value={SEARCH_BY.TITLE} className={(searchBy === SEARCH_BY.TITLE) ? styles.active : ''}>Title</button>
-              <button type="button" onClick={this.handleFilter} value={SEARCH_BY.GENRE} className={(searchBy === SEARCH_BY.GENRE) ? styles.active : ''}>Genre</button>
-            </span>
-          </div>
-        </div>
+        <Search />
 
         <div className={styles['search-results-header']}>
           <div className={styles['search-results-header-inner']}>
@@ -119,20 +103,14 @@ class MoviesSearchContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  searchTerm: state.searchTerm,
-  searchBy: state.searchBy,
   sortBy: state.sortBy,
+  searchBy: state.searchBy,
+  searchTerm: state.searchTerm,
 });
 
 const mapDispatchToProps = dispatch => ({
-  updSearchTerm: (value) => {
-    dispatch(updateSearchTerm(value));
-  },
   sortToggle: (value) => {
     dispatch(sortBY(value));
-  },
-  filterToggle: (value) => {
-    dispatch(searchBY(value));
   },
 });
 

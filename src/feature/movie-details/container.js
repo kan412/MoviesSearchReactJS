@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import MovieCard from '../../shared/movie-card';
 import getYear from '../../shared/utils';
 import config from '../../../config';
 import styles from './component.css';
 
 class MovieDetailsContainer extends React.Component {
+  isMounted = false;
+
   constructor(props) {
     super(props);
 
@@ -17,6 +19,8 @@ class MovieDetailsContainer extends React.Component {
   }
 
   async componentDidMount() {
+    this.isMounted = true;
+
     const { match } = this.props;
     const queryString = `${config.API_URL}/${match.params.id}`;
 
@@ -27,19 +31,24 @@ class MovieDetailsContainer extends React.Component {
 
     const relatedRes = await fetch(relatedMoviesQueryString);
     const { data } = await relatedRes.json();
-    this.setState({ movie, relatedMovies: data });
+    if (this.isMounted) {
+      this.setState({ movie, relatedMovies: data });
+    }
+  }
+
+  componentWillUnmount() {
+    this.isMounted = false;
   }
 
   handleMovieClick = (movie) => {
     const { history } = this.props;
-    console.log(history);
     history.push(`/film/${movie.id}`);
   }
 
   render() {
     const { movie, relatedMovies } = this.state;
     const mlist = relatedMovies.map(
-      mov => <MovieCard key={mov.id} data={mov} onMovieClick={this.handleMovieClick} />
+      mov => <MovieCard key={mov.id} data={mov} onMovieClick={this.handleMovieClick} />,
     );
 
     return (
@@ -94,6 +103,7 @@ MovieDetailsContainer.propTypes = {
       id: PropTypes.string,
     }).isRequired,
   }).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   history: PropTypes.object.isRequired,
 };
 

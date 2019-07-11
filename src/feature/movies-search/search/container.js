@@ -7,26 +7,33 @@ import { searchBY, updSearchTerm } from '../../../core/store/actions';
 
 
 class SearchComponent extends React.Component {
-
   static propTypes = {
-    searchBy: PropTypes.string.isRequired,
+    filterToggle: PropTypes.func.isRequired,
+    updateSearchTerm: PropTypes.func.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      searchBy: SEARCH_BY.TITLE,
+    };
   }
 
   handleClick = () => {
     const inputValue = document.getElementById('search-movies').value;
-    const { updateSearchTerm } = this.props;
+    const { filterToggle, updateSearchTerm } = this.props;
+    const { searchBy } = this.state;
+    filterToggle(searchBy);
     updateSearchTerm(inputValue);
   };
 
-  
   handleFilter = (e) => {
-    const { filterToggle } = this.props;
-    filterToggle(e.target.value);
+    this.setState({ searchBy: e.target.value });
   };
- 
+
   render() {
-    console.log(this.props);
-    const { searchBy } = this.props;
+    const { searchBy } = this.state;
     return (
       <div className={styles['search-form']}>
         <label htmlFor="search-movies">
@@ -46,10 +53,6 @@ class SearchComponent extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  searchBy: state.searchBy,
-});
-
 const mapDispatchToProps = dispatch => ({
   updateSearchTerm: (value) => {
     dispatch(updSearchTerm(value));
@@ -59,4 +62,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchComponent);
+export default connect(null, mapDispatchToProps)(SearchComponent);

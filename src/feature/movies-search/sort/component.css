@@ -1,0 +1,37 @@
+.search-results-sort .split-buttons{
+    margin-left: 15px;
+}
+
+.search-results-sort .split-buttons button{
+    background: #484848;
+}
+
+
+button{
+    display: inline-block;
+    background:rgba(85,85,85,0.5);
+    color:#fff;
+    border-radius: 6px;
+    border:none;
+    padding:5px 15px;
+    margin-right:0px;
+    text-transform: uppercase;
+    cursor:pointer;
+}
+
+button:hover, button.active{
+    background: #f65261 !important;
+}
+
+.split-buttons button{
+    border-radius:0;
+} 
+
+.split-buttons button:first-child{
+    border-radius: 6px 0 0 6px;
+    border-right: 1px solid #232323;
+}
+
+.split-buttons button:last-child{
+    border-radius: 0 6px 6px 0;
+}

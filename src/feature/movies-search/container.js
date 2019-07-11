@@ -1,20 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 
 import MovieCard from '../../shared/movie-card';
 import config from '../../../config';
-import { searchBY, sortBY } from '../../core/store/actions';
-import { SEARCH_BY, SORT_BY } from '../../shared';
+import { SEARCH_BY } from '../../shared';
 import styles from './component.css';
 import Search from './search';
+import Sort from './sort';
 
 class MoviesSearchContainer extends React.Component {
   static propTypes = {
-    sortToggle: PropTypes.func.isRequired,
+    searchTerm: PropTypes.string.isRequired,
     searchBy: PropTypes.string.isRequired,
     sortBy: PropTypes.string.isRequired,
+    // eslint-disable-next-line react/forbid-prop-types
     history: PropTypes.object.isRequired,
   }
 
@@ -27,14 +28,14 @@ class MoviesSearchContainer extends React.Component {
   }
 
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const { firstLoad } = this.state;
     const { sortBy, searchBy, searchTerm } = this.props;
 
     if (!firstLoad
        && (prevProps.sortBy === sortBy
          && prevProps.searchBy === searchBy
-          && prevState.searchTerm === searchTerm)
+          && prevProps.searchTerm === searchTerm)
     ) {
       return;
     }
@@ -42,23 +43,15 @@ class MoviesSearchContainer extends React.Component {
     let queryString = '';
 
     if (searchBy === SEARCH_BY.GENRE) {
-      queryString = `${config.API_URL}?sortBy=${sortBy}&searchBy=${searchBy}&filter=${searchTerm}`;
+      queryString = `${config.API_URL}?sortBy=${sortBy}&sortOrder=desc&searchBy=${searchBy}&filter=${searchTerm}`;
     } else {
-      queryString = `${config.API_URL}?sortBy=${sortBy}&search=${searchTerm}&searchBy=${searchBy}`;
+      queryString = `${config.API_URL}?sortBy=${sortBy}&sortOrder=desc&search=${searchTerm}&searchBy=${searchBy}`;
     }
 
     fetch(queryString)
       .then(res => res.json())
       .then(data => this.setState({ movies: data.data, firstLoad: false }));
-
-      console.log(queryString);
   }
-
-  handleSort = (e) => {
-    const { sortToggle } = this.props;
-    sortToggle(e.target.value);
-  }
-
 
   handleMovieClick = (movie) => {
     const { history } = this.props;
@@ -71,7 +64,6 @@ class MoviesSearchContainer extends React.Component {
 
   render() {
     const { movies } = this.state;
-    const { sortBy } = this.props;
     const mList = this.moviesList(movies);
 
     return (
@@ -84,13 +76,7 @@ class MoviesSearchContainer extends React.Component {
               { mList.length }
               <span> movies found</span>
             </div>
-            <div className={styles['search-results-sort']}>
-              Sort by
-              <span className={styles['split-buttons']}>
-                <button type="button" onClick={this.handleSort} value={SORT_BY.YEAR} className={(sortBy === SORT_BY.YEAR) ? styles.active : ''}>Release Date</button>
-                <button type="button" onClick={this.handleSort} value={SORT_BY.RATING} className={(sortBy === SORT_BY.RATING) ? styles.active : ''}>Rating</button>
-              </span>
-            </div>
+            <Sort />
           </div>
         </div>
 
@@ -108,10 +94,4 @@ const mapStateToProps = state => ({
   searchTerm: state.searchTerm,
 });
 
-const mapDispatchToProps = dispatch => ({
-  sortToggle: (value) => {
-    dispatch(sortBY(value));
-  },
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MoviesSearchContainer));
+export default withRouter(connect(mapStateToProps)(MoviesSearchContainer));

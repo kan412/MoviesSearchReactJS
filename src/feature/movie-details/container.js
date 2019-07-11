@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import MovieCard from '../../shared/movie-card';
-import getYear from '../../shared/utils';
+import SearchResults from './search-results';
+import SearchResultsHeader from './search-results-header';
 import config from '../../../config';
-import styles from './component.css';
+import MovieSummary from './movie-summary';
 
 class MovieDetailsContainer extends React.Component {
   isMounted = false;
@@ -27,7 +28,7 @@ class MovieDetailsContainer extends React.Component {
     const movieRes = await fetch(queryString);
     const movie = await movieRes.json();
 
-    const relatedMoviesQueryString = `${config.API_URL}?searchBy=genres&filter=${movie.genres.join(',')}`;
+    const relatedMoviesQueryString = `${config.API_URL}?searchBy=genres&filter=${encodeURIComponent(movie.genres.join(','))}`;
 
     const relatedRes = await fetch(relatedMoviesQueryString);
     const { data } = await relatedRes.json();
@@ -40,9 +41,16 @@ class MovieDetailsContainer extends React.Component {
     this.isMounted = false;
   }
 
-  handleMovieClick = (movie) => {
+  handleMovieClick = async (movie) => {
     const { history } = this.props;
     history.push(`/film/${movie.id}`);
+
+    const relatedMoviesQueryString = `${config.API_URL}?searchBy=genres&filter=${encodeURIComponent(movie.genres.join(','))}`;
+
+    const relatedRes = await fetch(relatedMoviesQueryString);
+    const { data } = await relatedRes.json();
+    const rmovies = data.filter(mov => mov.id !== movie.id);
+    this.setState({ movie, relatedMovies: rmovies });
   }
 
   render() {
@@ -53,44 +61,9 @@ class MovieDetailsContainer extends React.Component {
 
     return (
       <React.Fragment>
-        <div className={styles['movie-summary']}>
-          <div className={styles.image}>
-            <img src={movie.poster_path} width="250px" alt={movie.title} />
-          </div>
-
-          <div className={styles.details}>
-            <h1 className={styles.title}>
-              {movie.title}
-              <span className={styles.rating}>{movie.vote_average}</span>
-            </h1>
-            <div className={styles.meta}>
-              <span className={styles['release-year']}>
-                <span>{getYear(movie.release_date)}</span>
-                Year
-              </span>
-              <span className={styles.duration}>
-                <span>{movie.runtime}</span>
-                Mins
-              </span>
-            </div>
-
-            <div className={styles.description}>
-              {movie.overview}
-            </div>
-          </div>
-        </div>
-
-        <div className={styles['search-results-header']}>
-          <div className={styles['search-results-header-inner']}>
-            <span>Films by  </span>
-            {movie.genres}
-            <span>  genre </span>
-          </div>
-        </div>
-
-        <div className={styles['search-results-container']}>
-          {(mlist.length > 0) ? mlist : 'No Items Found'}
-        </div>
+        <MovieSummary data={movie} />
+        <SearchResultsHeader genres={movie.genres} />
+        <SearchResults data={mlist} />
       </React.Fragment>
     );
   }

@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import MovieCard from '../../shared/movie-card';
 import config from '../../../config';
 import { SEARCH_BY } from '../../shared';
-import styles from './component.css';
 import Search from './search';
-import Sort from './sort';
+import SearchResultsHeader from './search-results-header';
+import SearchResults from './search-results';
 
 class MoviesSearchContainer extends React.Component {
   static propTypes = {
@@ -69,20 +69,8 @@ class MoviesSearchContainer extends React.Component {
     return (
       <React.Fragment>
         <Search />
-
-        <div className={styles['search-results-header']}>
-          <div className={styles['search-results-header-inner']}>
-            <div className={styles['search-results-found']}>
-              { mList.length }
-              <span> movies found</span>
-            </div>
-            <Sort />
-          </div>
-        </div>
-
-        <div className={styles['search-results-container']}>
-          { (mList.length > 0) ? mList : <h3 className={styles['notfound-title']}>No films Found</h3> }
-        </div>
+        <SearchResultsHeader searchResults={mList.length} />
+        <SearchResults data={mList} />
       </React.Fragment>
     );
   }

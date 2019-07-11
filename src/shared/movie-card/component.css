@@ -1,3 +1,8 @@
+ .button{
+    padding:0;
+    background: none;
+}
+
 .movie{
     width: 250px;
 }

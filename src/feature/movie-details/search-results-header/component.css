@@ -1,0 +1,23 @@
+
+.search-results-header{
+    width:100%;
+    background:#555;
+    text-transform: uppercase;
+}
+
+.search-results-header-inner{
+    width: 100%;
+    max-width: 1200px;
+    padding:15px;
+    margin: 0 auto;
+    display:flex;
+    align-items: center;
+}
+
+.search-results-header-inner div{
+    flex: 1;
+}
+
+.search-results-header-inner div:last-child{
+    text-align:right;
+}

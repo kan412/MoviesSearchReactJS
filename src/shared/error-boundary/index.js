@@ -1,1 +1,1 @@
-export { default } from './ErrorBoundaryContainer';
+export { default } from './container';

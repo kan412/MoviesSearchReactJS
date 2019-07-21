@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './AppHeader.css';
+import styles from './component.css';
 
-const AppHeader = () => (
+const AppHeaderComponent = () => (
   <header className={styles.header}>
     <div className={styles.inner}>
       <a href="/">
@@ -14,4 +14,4 @@ const AppHeader = () => (
   </header>
 );
 
-export default AppHeader;
+export default AppHeaderComponent;

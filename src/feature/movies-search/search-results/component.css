@@ -1,0 +1,19 @@
+.search-results-container{
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 25px auto;
+    display:flex;
+    flex:1;
+    flex-wrap: wrap;
+}
+
+.search-results-container > div{
+    margin: 20px;
+}
+
+.notfound-title{
+    width:100%;
+    margin: 50px auto;
+    text-align: center;
+}

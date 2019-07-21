@@ -1,0 +1,21 @@
+.error{
+    width: 1200px;
+    background: #3a3a3a;
+    margin: 100px auto;
+    padding: 50px;
+    text-align: center;
+    border: 1px solid #000;
+    box-shadow: 1px 1px 3px #000;
+}
+
+.title{
+    color:#f65261;
+    text-transform: uppercase;
+    font-size: 25px;
+    line-height: 37px;
+}
+
+.info{
+    margin-top: 10px;
+    font-weight: 400;
+}

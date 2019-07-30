@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MovieCardContainer /> render without breaking 1`] = `
+<div
+  className="movie"
+>
+  <button
+    className="button"
+    onClick={[Function]}
+    type="button"
+  >
+    <img
+      alt="Fifty Shades Freed"
+      className="movie-thumbnail"
+      height="400px"
+      src="https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg"
+      width="250px"
+    />
+  </button>
+  <div
+    className="movie-header"
+  >
+    <span
+      className="movie-name"
+    >
+      Fifty Shades Freed
+    </span>
+    <span
+      className="movie-release-date"
+    >
+      2018
+    </span>
+    <span
+      className="movie-genre"
+    >
+      Drama, Romance
+    </span>
+  </div>
+</div>
+`;

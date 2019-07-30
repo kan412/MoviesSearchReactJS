@@ -6,7 +6,7 @@ import { SEARCH_BY } from '../../../shared';
 import { searchBY, updSearchTerm } from '../../../core/store/actions';
 
 
-class SearchComponent extends React.Component {
+export class SearchContainer extends React.Component {
   static propTypes = {
     filterToggle: PropTypes.func.isRequired,
     updateSearchTerm: PropTypes.func.isRequired,
@@ -53,7 +53,7 @@ class SearchComponent extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   updateSearchTerm: (value) => {
     dispatch(updSearchTerm(value));
   },
@@ -62,4 +62,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(SearchComponent);
+export default connect(null, mapDispatchToProps)(SearchContainer);

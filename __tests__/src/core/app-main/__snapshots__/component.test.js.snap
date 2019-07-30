@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AppMain /> render without breaking 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <BrowserRouter>
+    <Switch>
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/"
+      />
+      <Route
+        component={[Function]}
+        path="/film/:id"
+      />
+      <Route
+        component={[Function]}
+        path="/404"
+      />
+      <Redirect
+        from="*"
+        to="/404"
+      />
+    </Switch>
+  </BrowserRouter>
+</Provider>
+`;

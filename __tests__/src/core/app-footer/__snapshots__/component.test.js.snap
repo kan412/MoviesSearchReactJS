@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AppFooter /> render without breaking 1`] = `
+<footer
+  className="footer"
+>
+  <div
+    className="inner"
+  >
+    <a
+      href="/"
+    >
+      <span
+        className="logo"
+      >
+        Netflix
+        <span>
+          roulette
+        </span>
+      </span>
+    </a>
+  </div>
+</footer>
+`;

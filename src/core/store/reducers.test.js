@@ -1,4 +1,4 @@
-import rootReducer from '../../../../src/core/store/reducers';
+import rootReducer from './reducers';
 
 describe('Reducers', () => {
   it('Initial State', () => {

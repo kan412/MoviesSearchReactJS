@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import AppMain from '../../../../src/core/app-main';
+import AppMain from './component';
 
 describe('<AppMain />', () => {
   it('render without breaking', () => {

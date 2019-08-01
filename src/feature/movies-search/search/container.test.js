@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SEARCH_BY } from '../../../../../src/shared';
-import { SearchContainer, mapDispatchToProps } from '../../../../../src/feature/movies-search/search/container';
+import { SEARCH_BY } from '../../../shared';
+import { SearchContainer, mapDispatchToProps } from './container';
 
 describe('Search', () => {
   it('renders properly', () => {
@@ -15,7 +15,18 @@ describe('Search', () => {
   });
 
   it('handleClick', () => {
-
+    const handleFilterToggle = jest.fn();
+    const handleUpdateSearchTerm = jest.fn();
+    const component = shallow(
+      <SearchContainer
+        filterToggle={handleFilterToggle}
+        updateSearchTerm={handleUpdateSearchTerm}
+      />,
+    );
+    const button = component.find('button').at(0);
+    button.simulate('click');
+    expect(handleFilterToggle).toHaveBeenCalled();
+    expect(handleUpdateSearchTerm).toHaveBeenCalled();
   });
 
   it('mapDispatchToProps', () => {

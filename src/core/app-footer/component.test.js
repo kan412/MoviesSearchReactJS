@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from '../../../../src/core/app';
+import AppFooter from './component';
 
-describe('<App />', () => {
+describe('<AppFooter />', () => {
   it('render without breaking', () => {
-    const component = shallow(<App />);
+    const component = shallow(<AppFooter />);
     expect(component).toMatchSnapshot();
   });
 });

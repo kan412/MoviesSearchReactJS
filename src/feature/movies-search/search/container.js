@@ -15,13 +15,15 @@ export class SearchContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.searchInput = React.createRef();
+
     this.state = {
       searchBy: SEARCH_BY.TITLE,
     };
   }
 
   handleClick = () => {
-    const inputValue = document.getElementById('search-movies').value;
+    const inputValue = this.searchInput.current.value;
     const { filterToggle, updateSearchTerm } = this.props;
     const { searchBy } = this.state;
     filterToggle(searchBy);
@@ -38,7 +40,7 @@ export class SearchContainer extends React.Component {
       <div className={styles['search-form']}>
         <label htmlFor="search-movies">
           <span>FIND YOUR MOVIE</span>
-          <input type="text" id="search-movies" />
+          <input type="text" ref={this.searchInput} id="search-movies" />
           <button type="button" onClick={this.handleClick} id={styles['search-button']}>Search</button>
         </label>
         <div className={styles['search-filter']}>

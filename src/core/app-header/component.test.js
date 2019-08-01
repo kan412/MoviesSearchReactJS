@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import AppHeader from '../../../../src/core/app-header';
+import AppHeader from './component';
 
 describe('<AppHeader />', () => {
   it('render without breaking', () => {

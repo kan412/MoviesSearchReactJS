@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchResultsHeader /> render without breaking 1`] = `
+<div
+  className="search-results-header"
+>
+  <div
+    className="search-results-header-inner"
+  >
+    <div
+      className="search-results-found"
+    >
+      10
+      <span>
+         movies found
+      </span>
+    </div>
+    <Connect(SortContainer) />
+  </div>
+</div>
+`;

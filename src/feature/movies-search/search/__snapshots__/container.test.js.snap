@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search renders properly 1`] = `
+<div
+  className="search-form"
+>
+  <label
+    htmlFor="search-movies"
+  >
+    <span>
+      FIND YOUR MOVIE
+    </span>
+    <input
+      id="search-movies"
+      type="text"
+    />
+    <button
+      id="search-button"
+      onClick={[Function]}
+      type="button"
+    >
+      Search
+    </button>
+  </label>
+  <div
+    className="search-filter"
+  >
+    Search by
+    <span
+      className="split-buttons"
+    >
+      <button
+        className="active"
+        onClick={[Function]}
+        type="button"
+        value="title"
+      >
+        Title
+      </button>
+      <button
+        className=""
+        onClick={[Function]}
+        type="button"
+        value="genres"
+      >
+        Genre
+      </button>
+    </span>
+  </div>
+</div>
+`;

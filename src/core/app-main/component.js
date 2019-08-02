@@ -9,7 +9,7 @@ import NotFound from '../../shared/not-found';
 import store from '../store/store';
 
 
-const AppMainComponent = () => (
+export const AppMainComponent = () => (
   <Provider store={store}>
     <Router>
       <Switch>

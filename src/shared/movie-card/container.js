@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import getYear from '../utils';
 import styles from './component.css';
 
-class MovieCardContainer extends React.Component {
+export class MovieCardContainer extends React.Component {
   handleClick = () => {
     const { data, onMovieClick } = this.props;
     onMovieClick(data);

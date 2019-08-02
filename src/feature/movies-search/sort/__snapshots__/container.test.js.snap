@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SortContainer /> render without breaking 1`] = `
+<div
+  className="search-results-sort"
+>
+  Sort by
+  <span
+    className="split-buttons"
+  >
+    <button
+      className=""
+      onClick={[Function]}
+      type="button"
+      value="release_date"
+    >
+      Release Date
+    </button>
+    <button
+      className=""
+      onClick={[Function]}
+      type="button"
+      value="vote_average"
+    >
+      Rating
+    </button>
+  </span>
+</div>
+`;

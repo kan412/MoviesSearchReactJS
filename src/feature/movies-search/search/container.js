@@ -6,7 +6,7 @@ import { SEARCH_BY } from '../../../shared';
 import { searchBY, updSearchTerm } from '../../../core/store/actions';
 
 
-class SearchComponent extends React.Component {
+export class SearchContainer extends React.Component {
   static propTypes = {
     filterToggle: PropTypes.func.isRequired,
     updateSearchTerm: PropTypes.func.isRequired,
@@ -15,13 +15,15 @@ class SearchComponent extends React.Component {
   constructor(props) {
     super(props);
 
+    this.searchInput = React.createRef();
+
     this.state = {
       searchBy: SEARCH_BY.TITLE,
     };
   }
 
   handleClick = () => {
-    const inputValue = document.getElementById('search-movies').value;
+    const inputValue = this.searchInput.current.value;
     const { filterToggle, updateSearchTerm } = this.props;
     const { searchBy } = this.state;
     filterToggle(searchBy);
@@ -38,7 +40,7 @@ class SearchComponent extends React.Component {
       <div className={styles['search-form']}>
         <label htmlFor="search-movies">
           <span>FIND YOUR MOVIE</span>
-          <input type="text" id="search-movies" />
+          <input type="text" ref={this.searchInput} id="search-movies" />
           <button type="button" onClick={this.handleClick} id={styles['search-button']}>Search</button>
         </label>
         <div className={styles['search-filter']}>
@@ -53,7 +55,7 @@ class SearchComponent extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   updateSearchTerm: (value) => {
     dispatch(updSearchTerm(value));
   },
@@ -62,4 +64,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(SearchComponent);
+export default connect(null, mapDispatchToProps)(SearchContainer);

@@ -4,13 +4,12 @@ import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 
 import MovieCard from '../../shared/movie-card';
-import config from '../../../config';
-import { SEARCH_BY } from '../../shared';
+import getMovies from './utils';
 import Search from './search';
 import SearchResultsHeader from './search-results-header';
 import SearchResults from './search-results';
 
-class MoviesSearchContainer extends React.Component {
+export class MoviesSearchContainer extends React.Component {
   static propTypes = {
     searchTerm: PropTypes.string.isRequired,
     searchBy: PropTypes.string.isRequired,
@@ -39,16 +38,8 @@ class MoviesSearchContainer extends React.Component {
     ) {
       return;
     }
-
-    let queryString = '';
-
-    if (searchBy === SEARCH_BY.GENRE) {
-      queryString = `${config.API_URL}?sortBy=${sortBy}&sortOrder=desc&searchBy=${searchBy}&filter=${searchTerm}`;
-    } else {
-      queryString = `${config.API_URL}?sortBy=${sortBy}&sortOrder=desc&search=${searchTerm}&searchBy=${searchBy}`;
-    }
-
-    fetch(queryString)
+    const url = getMovies(sortBy, searchBy, searchTerm);
+    fetch(url)
       .then(res => res.json())
       .then(data => this.setState({ movies: data.data, firstLoad: false }));
   }

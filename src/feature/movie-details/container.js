@@ -7,7 +7,7 @@ import SearchResultsHeader from './search-results-header';
 import config from '../../../config';
 import MovieSummary from './movie-summary';
 
-class MovieDetailsContainer extends React.Component {
+export class MovieDetailsContainer extends React.Component {
   isMounted = false;
 
   constructor(props) {

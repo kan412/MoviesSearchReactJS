@@ -5,7 +5,7 @@ import styles from './component.css';
 import { SORT_BY } from '../../../shared';
 import { sortBY } from '../../../core/store/actions';
 
-class Sort extends React.Component {
+export class SortContainer extends React.Component {
   static propTypes = {
     sortToggle: PropTypes.func.isRequired,
     sortBy: PropTypes.string.isRequired,
@@ -30,15 +30,15 @@ class Sort extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   sortBy: state.sortBy,
 });
 
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   sortToggle: (value) => {
     dispatch(sortBY(value));
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sort);
+export default connect(mapStateToProps, mapDispatchToProps)(SortContainer);
